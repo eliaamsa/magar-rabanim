@@ -1,0 +1,41 @@
+[
+  {
+    "id": "rabbi-1",
+    "token": "a1b2c3d4e5f6",
+    "rabbi_name": "",
+    "rabbanit_name": "",
+    "role_description": "",
+    "city_and_neighborhood": "",
+    "phone_number": "",
+    "email_address": "",
+    "social_media_links": "",
+    "personal_photo_url": "",
+    "activity_fields": ""
+  },
+  {
+    "id": "rabbi-2",
+    "token": "g7h8i9j0k1l2",
+    "rabbi_name": "ישראל ישראלי",
+    "rabbanit_name": "שרה",
+    "role_description": "רב קהילת 'אור תורה'",
+    "city_and_neighborhood": "ירושלים, קרית משה",
+    "phone_number": "050-1234567",
+    "email_address": "rabbi@example.com",
+    "social_media_links": "https://facebook.com/rabbi",
+    "personal_photo_url": "https://via.placeholder.com/150",
+    "activity_fields": "שיעורי תורה, ייעוץ זוגי, הכנה לבר מצווה"
+  },
+  {
+    "id": "rabbi-3",
+    "token": "m3n4o5p6q7r8",
+    "rabbi_name": "",
+    "rabbanit_name": "",
+    "role_description": "",
+    "city_and_neighborhood": "",
+    "phone_number": "",
+    "email_address": "",
+    "social_media_links": "",
+    "personal_photo_url": "",
+    "activity_fields": ""
+  }
+]
