@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>רבני הקהילות - כנס יוצר אור</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>כנס רבני הקהילות "יוצר אור"</h1>
+        <p>לחצו על פני הרבנים כדי לקבל מידע נוסף</p>
+        
+        <div class="image-container">
+            <img src="https://i.ibb.co/L6qTj0p/image.png" usemap="#rabbis-map" alt="תמונת רבני הקהילות">
+            <map name="rabbis-map">
+                <!-- האזורים ימופו כאן ידנית. הוספתי 3 דוגמאות -->
+                <area shape="rect" coords="440,400,490,470" href="#" data-id="rabbi-1" alt="Rabbi 1">
+                <area shape="rect" coords="500,400,550,470" href="#" data-id="rabbi-2" alt="Rabbi 2">
+                <area shape="rect" coords="560,400,610,470" href="#" data-id="rabbi-3" alt="Rabbi 3">
+                <!-- יש להוסיף כאן את כל שאר הרבנים -->
+            </map>
+        </div>
+    </div>
+
+    <!-- חלון מודאלי להצגת המידע -->
+    <div id="rabbiModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">×</span>
+            <div id="modalBody">
+                <!-- תוכן המידע יוזרק לכאן דינמית -->
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
