@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>עריכת פרופיל אישי</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>מילוי ועדכון פרטים אישיים</h1>
+        <form id="editForm">
+            <label for="rabbi_name">שם הרב:</label>
+            <input type="text" id="rabbi_name" name="rabbi_name" required>
+
+            <label for="rabbanit_name">שם הרבנית:</label>
+            <input type="text" id="rabbanit_name" name="rabbanit_name">
+
+            <label for="role_description">תפקיד (לדוגמה: רב קהילת...):</label>
+            <input type="text" id="role_description" name="role_description">
+
+            <label for="city_and_neighborhood">עיר ושכונה:</label>
+            <input type="text" id="city_and_neighborhood" name="city_and_neighborhood">
+
+            <label for="phone_number">טלפון (אופציונלי):</label>
+            <input type="tel" id="phone_number" name="phone_number">
+
+            <label for="email_address">אימייל (אופציונלי):</label>
+            <input type="email" id="email_address" name="email_address">
+            
+            <label for="social_media_links">קישור לרשת חברתית (אופציונלי):</label>
+            <input type="url" id="social_media_links" name="social_media_links">
+            
+            <label for="personal_photo_url">קישור לתמונה אישית (אופציונלי):</label>
+            <input type="url" id="personal_photo_url" name="personal_photo_url">
+
+            <label for="activity_fields">תחומי פעילות מיוחדים (נא להפריד בפסיקים):</label>
+            <textarea id="activity_fields" name="activity_fields" rows="3"></textarea>
+            
+            <button type="submit">שמירה ועדכון</button>
+        </form>
+        <p id="successMessage" style="display:none; color: green; font-weight: bold; margin-top: 15px;">הפרטים עודכנו בהצלחה!</p>
+    </div>
+    <script src="edit.js"></script>
+</body>
+</html>
