@@ -1,0 +1,164 @@
+body {
+    font-family: 'Arial', sans-serif;
+    direction: rtl;
+    text-align: right;
+    background-color: #f4f4f4;
+    color: #333;
+    margin: 0;
+    padding: 20px;
+}
+.container {
+    max-width: 1200px;
+    margin: auto;
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+h1 {
+    color: #0056b3;
+    text-align: center;
+}
+p { text-align: center; }
+.image-container {
+    position: relative;
+    max-width: 100%;
+}
+.image-container img {
+    max-width: 100%;
+    height: auto;
+}
+area:hover { cursor: pointer; }
+
+/* Modal styles */
+.modal {
+    display: none; 
+    position: fixed; 
+    z-index: 1000; 
+    left: 0;
+    top: 0;
+    width: 100%; 
+    height: 100%; 
+    overflow: auto; 
+    background-color: rgba(0,0,0,0.6);
+}
+.modal-content {
+    background-color: #fefefe;
+    margin: 10% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 500px;
+    border-radius: 8px;
+    position: relative;
+}
+.close-button {
+    color: #aaa;
+    position: absolute;
+    left: 15px;
+    top: 5px;
+    font-size: 28px;
+    font-weight: bold;
+}
+.close-button:hover,
+.close-button:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+#modalBody img.personal-photo {
+    max-width: 150px;
+    border-radius: 50%;
+    display: block;
+    margin: 0 auto 15px;
+}
+#modalBody h2 {
+    text-align: center;
+    color: #0056b3;
+}
+#modalBody p { text-align: right; }
+#modalBody strong { color: #555; }
+
+/* Form Styles */
+form { display: flex; flex-direction: column; }
+label { margin-top: 10px; font-weight: bold; }
+input[type="text"], input[type="email"], input[type="tel"], input[type="url"], textarea {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-top: 5px;
+    font-size: 16px;
+}
+button {
+    margin-top: 20px;
+    padding: 12px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 18px;
+}
+button:hover { background-color: #0056b3; }```
+
+**קובץ: `public/script.js`**
+
+```javascript
+document.addEventListener('DOMContentLoaded', async () => {
+    const modal = document.getElementById('rabbiModal');
+    const modalBody = document.getElementById('modalBody');
+    const closeButton = document.querySelector('.close-button');
+    let rabbisData = [];
+
+    // טעינת המידע מהשרת
+    try {
+        const response = await fetch('/api/rabbis');
+        rabbisData = await response.json();
+    } catch (error) {
+        console.error('Failed to load rabbis data:', error);
+        alert('טעינת המידע נכשלה.');
+    }
+
+    // הוספת אירוע לחיצה לכל אזור במפה
+    document.querySelectorAll('map[name="rabbis-map"] area').forEach(area => {
+        area.addEventListener('click', (event) => {
+            event.preventDefault();
+            const rabbiId = area.getAttribute('data-id');
+            const rabbiInfo = rabbisData.find(r => r.id === rabbiId);
+            
+            if (rabbiInfo) {
+                displayRabbiInfo(rabbiInfo);
+            }
+        });
+    });
+
+    function displayRabbiInfo(rabbi) {
+        // בודק אם השדות ריקים
+        if (!rabbi.rabbi_name) {
+            modalBody.innerHTML = `<h2>מידע חסר</h2><p>הפרטים עבור רב זה טרם הוזנו.</p>`;
+        } else {
+             modalBody.innerHTML = `
+                ${rabbi.personal_photo_url ? `<img src="${rabbi.personal_photo_url}" alt="תמונה של ${rabbi.rabbi_name}" class="personal-photo">` : ''}
+                <h2>${rabbi.rabbi_name}</h2>
+                <p><strong>הרבנית:</strong> ${rabbi.rabbanit_name || 'לא הוזן'}</p>
+                <p><strong>תפקיד:</strong> ${rabbi.role_description || 'לא הוזן'}</p>
+                <p><strong>מקום:</strong> ${rabbi.city_and_neighborhood || 'לא הוזן'}</p>
+                <p><strong>טלפון:</strong> ${rabbi.phone_number ? `<a href="tel:${rabbi.phone_number}">${rabbi.phone_number}</a>` : 'לא הוזן'}</p>
+                <p><strong>אימייל:</strong> ${rabbi.email_address ? `<a href="mailto:${rabbi.email_address}">${rabbi.email_address}</a>` : 'לא הוזן'}</p>
+                <p><strong>רשתות חברתיות:</strong> ${rabbi.social_media_links ? `<a href="${rabbi.social_media_links}" target="_blank">קישור</a>` : 'לא הוזן'}</p>
+                <p><strong>תחומי פעילות:</strong> ${rabbi.activity_fields || 'לא הוזן'}</p>
+            `;
+        }
+        modal.style.display = 'block';
+    }
+
+    // סגירת החלון
+    closeButton.onclick = () => {
+        modal.style.display = 'none';
+    };
+    window.onclick = (event) => {
+        if (event.target == modal) {
+            modal.style.display = 'none';
+        }
+    };
+});
